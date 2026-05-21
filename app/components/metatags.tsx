@@ -7,11 +7,11 @@ type TagsData = {
 }
 
 export const defaults: TagsData = {
-  title: "Blazium Engine",
-  description: "Community-driven, powerful, and flexible. The stable Godot fork, with features that matter.",
-  keywords: "Blazium Engine, Godot Engine, Community-driven, Networking, game dev",
-  image: "",
-  cardType: "summary_large_image",
+  title: "sshiiden.dev",
+  description: "Nicholas Santos Shiden (sshiiden) is a web developer and UI/UX designer. He is the founder of Blazium Games, a game development studio.",
+  keywords: "webdev, blazium, games, ui, ux, minecraft",
+  image: "/sshiiden.png",
+  cardType: "summary_small_image",
 }
 
 export function MetaTags({

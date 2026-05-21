@@ -1,22 +1,19 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
-
 html {
-  --color-bg-dark: oklch(1.00 0.00 0);
-  --color-bg: oklch(1.00 0.00 0);
-  --color-bg-light: oklch(1.00 0.00 0);
+  --hue: 300;
+  --color-bg-dark: oklch(0.50 0.02 var(--hue));
+  --color-bg: oklch(0.75 0.02 var(--hue));
+  --color-bg-light: oklch(0.90 0.02 var(--hue));
 
-  --color-text: oklch(0.01 0.00 0);
+  --color-text: oklch(0.00 0.00 0);
   --color-text-muted: oklch(from var(--color-text) l c h / 0.8);
 
-  --font-f-heading: "Roboto", sans-serif;
-  --font-f-text: "Inter", sans-serif;
+  --font-f-heading: Helvetica, sans-serif;
+  --font-f-text: var(--font-f-heading);
 
-  --font-s-h1: 4.210rem;
-  --font-s-h2: 3.158rem;
-  --font-s-h3: 2.369rem;
-  --font-s-h4: 1.777rem;
-  --font-s-h5: 1.333rem;
-  --font-s-h6: 1.125rem;
+  --font-s-h1: 2.369rem;
+  --font-s-h2: 1.777rem;
+  --font-s-h3: 1.333rem;
+  --font-s-h4: 1.125rem;
   --font-s-p: 1.000rem;
   --font-s-small: 0.875rem;
 
@@ -51,12 +48,10 @@ html {
   --h2: var(--font-w-semibold) var(--font-s-h2)/var(--line-h-tight) var(--font-f-heading);
   --h3: var(--font-w-semibold) var(--font-s-h3)/var(--line-h-base) var(--font-f-heading);
   --h4: var(--font-w-semibold) var(--font-s-h4)/var(--line-h-base) var(--font-f-heading);
-  --h5: var(--font-w-semibold) var(--font-s-h5)/var(--line-h-base) var(--font-f-heading);
-  --h6: var(--font-w-semibold) var(--font-s-h6)/var(--line-h-base) var(--font-f-heading);
   --p: var(--font-w-normal) var(--font-s-p)/var(--line-h-loose) var(--font-f-text);
   --small: var(--font-w-normal) var(--font-s-small)/var(--line-h-loose) var(--font-f-text);
 
-  background-color: var(--color-bg-dark);
+  background-color: var(--color-bg);
   color-scheme: light;
   scrollbar-gutter: stable;
   scrollbar-width: auto;
@@ -83,16 +78,10 @@ html {
     font: var(--h3);
   }
 
-  h4 {
-    font: var(--h4);
-  }
-
-  h5 {
-    font: var(--h5);
-  }
-
+  h4,
+  h5,
   h6 {
-    font: var(--h6);
+    font: var(--h4);
   }
 
   p {
@@ -106,12 +95,13 @@ html {
   a {
     color: inherit;
     transition: color 0.1s;
+    font-family: monospace, var(--font-f-heading);
   }
 
   ul,
   ol {
-    padding-left: var(--spacing-m);
-    line-height: var(--line-h-loose);
+    list-style: square;
+    list-style-position: inside;
   }
 
   details summary {
@@ -155,11 +145,5 @@ body {
   display: flex;
   flex-direction: column;
   z-index: 0;
-}
-
-main {
-  max-width: 1200px;
-  width: 100%;
-  margin-inline: auto;
-  padding-inline: var(--spacing-xl);
+  padding: var(--spacing-2xs);
 }

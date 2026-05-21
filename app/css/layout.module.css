@@ -1,0 +1,32 @@
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-m);
+  border: 3px outset var(--color-bg-light);
+  margin-bottom: var(--spacing-2xs);
+  padding: var(--spacing-2xs);
+
+  img {
+    height: 30px;
+    image-rendering: pixelated;
+    display: block;
+  }
+
+  nav {
+    display: flex;
+    gap: var(--spacing-2xs);
+
+    a {
+      text-decoration: none;
+      text-transform: uppercase;
+      font-weight: bold;
+      letter-spacing: 3px;
+      border: 2px outset var(--color-bg-light);
+      padding: 0 var(--spacing-2xs);
+
+      &[class="active"] {
+        border: 2px inset var(--color-bg-light);
+      }
+    }
+  }
+}

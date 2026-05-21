@@ -26,14 +26,14 @@ export default ({ loaderData }: Route.ComponentProps) => {
         <meta name="twitter:url" content={loaderData.url} />
         <meta name="twitter:creator" content="" />
         <meta name="theme-color" content="#ffffff" />
-        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="/sshiiden.png" type="image/png" />
         <link rel="canonical" href={loaderData.url} />
         <Links />
       </head>
       <body>
         <Outlet />
-        <ScrollRestoration />
-        <Scripts />
+        {/* <ScrollRestoration />
+        <Scripts /> */}
       </body>
     </html>
   );
