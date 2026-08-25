@@ -1,7 +1,7 @@
 .header {
   display: flex;
-  align-items: center;
-  gap: var(--spacing-m);
+  align-items: stretch;
+  gap: var(--spacing-2xs);
   border: 3px outset var(--color-bg-light);
   margin-bottom: var(--spacing-2xs);
   padding: var(--spacing-2xs);
@@ -14,15 +14,14 @@
 
   nav {
     display: flex;
-    gap: var(--spacing-2xs);
 
     a {
       text-decoration: none;
       text-transform: uppercase;
-      font-weight: bold;
-      letter-spacing: 3px;
+      font-weight: var(--font-w-bold);
+      letter-spacing: 2px;
       border: 2px outset var(--color-bg-light);
-      padding: 0 var(--spacing-2xs);
+      padding: var(--spacing-2xs);
 
       &[class="active"] {
         border: 2px inset var(--color-bg-light);

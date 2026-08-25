@@ -10,4 +10,4 @@ slug: test
 
 Lorem ipsum.
 
-![](/Senzanome3.jpg)
+![](/images/Senzanome3.jpg)

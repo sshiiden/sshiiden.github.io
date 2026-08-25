@@ -39,6 +39,7 @@ export default {
     return [
       "/",
       "/blog",
+      "/imgs",
       ...articlesSlugs.map((s) => `/articles/${s}`),
     ];
   },

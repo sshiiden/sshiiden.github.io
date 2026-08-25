@@ -1,0 +1,31 @@
+.main {
+  section {
+    margin-top: var(--spacing-xs);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(256px, 1fr));
+
+    a {
+      position: relative;
+    }
+
+    a::after {
+      content: attr(title);
+      position: absolute;
+      bottom: 0;
+      left: var(--spacing-2xs);
+      font: var(--small);
+      font-family: monospace;
+      color: var(--color-text-muted);
+      text-shadow: 1px 1px 0 var(--color-bg);
+    }
+  }
+
+  img {
+    border: 3px outset var(--color-bg-light);
+    display: block;
+    aspect-ratio: 1;
+    width: 100%;
+    object-fit: contain;
+    image-rendering: pixelated;
+  }
+}

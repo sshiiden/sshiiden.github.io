@@ -24,13 +24,13 @@ export default ({ loaderData }: Route.ComponentProps) => {
     <MetaTags />
     <main className={style["main"]}>
       <h1>Blog</h1>
-      <ul>
+      <ol>
         {loaderData.map((article) => (
           <li key={article["slug"]}>
             <Link to={`/articles/${article["slug"]}`}>{article["title"]}</Link>
           </li>
         ))}
-      </ul>
+      </ol>
     </main>
   </>
 }

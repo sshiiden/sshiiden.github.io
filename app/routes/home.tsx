@@ -26,7 +26,7 @@ export default ({ }: Route.ComponentProps) => {
   return <>
     <MetaTags />
     <main className={style["main"]}>
-      <img src="/Senzanome3.jpg" alt="aa" />
+      <img src="/images/Senzanome3.jpg" alt="Senzanome3" />
       <section>
         <h1>Nicholas Santos Shiden (sshiiden)</h1>
         <p>
