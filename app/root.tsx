@@ -25,7 +25,7 @@ export default ({ loaderData }: Route.ComponentProps) => {
         <meta property="og:url" content={loaderData.url} />
         <meta name="twitter:url" content={loaderData.url} />
         <meta name="twitter:creator" content="" />
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#b0abb9" />
         <link rel="shortcut icon" href="/images/sshiiden.png" type="image/png" />
         <link rel="canonical" href={loaderData.url} />
         <Links />
