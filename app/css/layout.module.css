@@ -29,3 +29,12 @@
     }
   }
 }
+
+.footer {
+  margin-top: auto;
+
+  small {
+    color: var(--color-text-muted);
+    font-family: monospace, var(--font-f-heading);
+  }
+}
