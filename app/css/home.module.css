@@ -1,9 +1,14 @@
 .main {
   display: flex;
-  gap: var(--spacing-s);
 
   @media (max-width: 700px) {
     flex-direction: column-reverse;
+  }
+
+  >img,
+  >section {
+    border: var(--border-main);
+    padding: var(--spacing-2xs);
   }
 
   >section {

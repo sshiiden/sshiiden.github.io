@@ -2,7 +2,7 @@
   display: flex;
   align-items: stretch;
   gap: var(--spacing-2xs);
-  border: 3px outset var(--color-bg-light);
+  border: var(--border-main);
   margin-bottom: var(--spacing-2xs);
   padding: var(--spacing-2xs);
 
@@ -16,15 +16,12 @@
     display: flex;
 
     a {
-      text-decoration: none;
       text-transform: uppercase;
       font-weight: var(--font-w-bold);
       letter-spacing: 2px;
-      border: 2px outset var(--color-bg-light);
-      padding: var(--spacing-2xs);
 
-      &[class="active"] {
-        border: 2px inset var(--color-bg-light);
+      &[class*="active"] {
+        border-style: inset;
       }
     }
   }

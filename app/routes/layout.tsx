@@ -9,8 +9,8 @@ export default ({ }: Route.ComponentProps) => {
         <img src="/images/sshiiden.png" alt="sshiiden" width="42" height="30" />
       </Link>
       <nav>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/msgs">Msgs</NavLink>
+        <NavLink to="/" className="button">Home</NavLink>
+        <NavLink to="/msgs" className="button">Msgs</NavLink>
       </nav>
     </header>
     <Outlet />

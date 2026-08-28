@@ -9,8 +9,8 @@
   form,
   aside {
     width: 100%;
-    border: 3px outset var(--color-bg-light);
-    padding: 3px;
+    border: var(--border-main);
+    padding: var(--spacing-2xs);
   }
 
   form {
@@ -36,7 +36,8 @@
     textarea {
       background-color: var(--color-bg-light);
       padding: var(--spacing-2xs);
-      border: 2px inset var(--color-bg);
+      border: var(--border-secondary);
+      border-style: inset;
     }
 
     label:has(textarea) {
@@ -67,9 +68,6 @@
     button {
       align-self: flex-start;
       text-transform: uppercase;
-      border: 2px outset var(--color-bg-light);
-      background-color: var(--color-bg);
-      padding: var(--spacing-2xs);
     }
   }
 }
@@ -77,26 +75,24 @@
 .dialog-image {
   margin-block: auto;
   max-height: 90%;
-  border: 3px outset var(--color-bg-light);
-  padding: 3px;
+  border: var(--border-main);
+  padding: var(--spacing-2xs);
   background-color: var(--color-bg);
 
   &::backdrop {
-    background-color: oklch(from var(--color-bg-dark) l c h / 0.5);
+    background-image: radial-gradient(var(--color-bg-dark) 1px, transparent 0);
+    background-size: 4px 4px;
   }
 
   >button {
     text-transform: uppercase;
-    border: 2px outset var(--color-bg-light);
-    background-color: var(--color-bg);
-    padding: var(--spacing-2xs);
   }
 
   li>button {
-    border: 2px outset var(--color-bg-light);
-    background-color: var(--color-bg);
-    padding: var(--spacing-2xs);
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   ul {
@@ -105,12 +101,8 @@
     grid-template-columns: repeat(4, 1fr);
   }
 
-  img,
-  span {
-    display: block;
-  }
-
   img {
+    display: block;
     max-width: 128px;
     aspect-ratio: 2;
     background-color: var(--color-bg-dark);

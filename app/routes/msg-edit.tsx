@@ -184,7 +184,7 @@ export default ({ loaderData, params }: Route.ComponentProps) => {
                 popoverTargetAction="hide"
               >
                 <img src={`/images/${image}`} />
-                <span>{image}</span>
+                <small>{image}</small>
               </button>
             </li>
           ))}

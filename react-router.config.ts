@@ -1,4 +1,5 @@
 import type { Config } from "@react-router/dev/config";
+import matter from "gray-matter";
 import fs from "node:fs/promises";
 import path from "node:path";
 
@@ -29,14 +30,33 @@ async function getMsgsSlugs() {
   return slugs;
 }
 
+async function getTags() {
+  const files = await walkMsgsFiles();
+  const allTags: { [key: string]: null } = {};
+
+  for (const filePath of files) {
+    const raw = await fs.readFile(filePath, 'utf8');
+    const { data } = matter(raw);
+    const tags: string[] = data["tags"] || [];
+    tags.forEach(tag => {
+      allTags[tag] = null;
+    });
+  }
+
+  return Object.keys(allTags);
+}
+
 export default {
   ssr: true,
   async prerender() {
     const slugs = await getMsgsSlugs();
+    const tags = await getTags();
     return [
       "/",
       "/msgs",
-      ...slugs.map((s) => `/msg/${s}`),
+      "/msgs/tags",
+      ...slugs.map(s => `/msg/${s}`),
+      ...tags.map(t => `/msgs/tags/${t}`),
     ];
   },
 } satisfies Config;

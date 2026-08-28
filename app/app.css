@@ -10,12 +10,12 @@ html {
   --font-f-heading: Helvetica, sans-serif;
   --font-f-text: var(--font-f-heading);
 
-  --font-s-h1: 2.369rem;
-  --font-s-h2: 1.777rem;
-  --font-s-h3: 1.333rem;
-  --font-s-h4: 1.125rem;
-  --font-s-p: 1.000rem;
-  --font-s-small: 0.875rem;
+  --font-s-h1: 2.00rem;
+  --font-s-h2: 1.75rem;
+  --font-s-h3: 1.50rem;
+  --font-s-h4: 1.25rem;
+  --font-s-p: 1.00rem;
+  --font-s-small: 0.75rem;
 
   --font-w-thin: 100;
   --font-w-extralight: 200;
@@ -46,10 +46,10 @@ html {
 
   --h1: var(--font-w-semibold) var(--font-s-h1)/var(--line-h-tight) var(--font-f-heading);
   --h2: var(--font-w-semibold) var(--font-s-h2)/var(--line-h-tight) var(--font-f-heading);
-  --h3: var(--font-w-semibold) var(--font-s-h3)/var(--line-h-base) var(--font-f-heading);
-  --h4: var(--font-w-semibold) var(--font-s-h4)/var(--line-h-base) var(--font-f-heading);
-  --p: var(--font-w-normal) var(--font-s-p)/var(--line-h-loose) var(--font-f-text);
-  --small: var(--font-w-normal) var(--font-s-small)/var(--line-h-loose) var(--font-f-text);
+  --h3: var(--font-w-semibold) var(--font-s-h3)/var(--line-h-tight) var(--font-f-heading);
+  --h4: var(--font-w-semibold) var(--font-s-h4)/var(--line-h-tight) var(--font-f-heading);
+  --p: var(--font-w-normal) var(--font-s-p)/var(--line-h-base) var(--font-f-text);
+  --small: var(--font-w-normal) var(--font-s-small)/var(--line-h-base) var(--font-f-text);
 
   background-color: var(--color-bg);
   color-scheme: light;
@@ -146,8 +146,22 @@ body {
   flex-direction: column;
   z-index: 0;
   padding: var(--spacing-2xs);
+
+  --border-main: 3px outset var(--color-bg-light);
+  --border-secondary: 2px outset var(--color-bg-light);
 }
 
-button {
+button,
+.button {
   cursor: pointer;
+  text-decoration: none;
+  border: var(--border-secondary);
+  background-color: var(--color-bg);
+  padding: var(--spacing-2xs);
+}
+
+.dev {
+  border: var(--border-secondary);
+  border-color: red;
+  border-style: dashed;
 }

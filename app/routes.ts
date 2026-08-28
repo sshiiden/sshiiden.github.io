@@ -3,6 +3,8 @@ import { type RouteConfig, index, route, layout } from "@react-router/dev/routes
 const routes = [
   index("routes/home.tsx"),
   route("/msgs", "routes/msgs.tsx"),
+  route("/msgs/tags/:tag", "routes/msgs.tsx", { id: "tag-filtered" }),
+  route("/msgs/tags", "routes/msgs-tags.tsx"),
   route("/msg/:slug", "routes/message.tsx"),
 ];
 
