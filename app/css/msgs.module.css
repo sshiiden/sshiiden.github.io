@@ -32,10 +32,10 @@
       border: 2px inset var(--color-bg);
       flex: 1;
     }
+  }
 
-    img {
-      max-width: 100%;
-    }
+  img {
+    max-width: 100%;
   }
 }
 

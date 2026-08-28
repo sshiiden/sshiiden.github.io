@@ -2,17 +2,26 @@ import type { Route } from "./+types/msg-edit";
 import style from "css/msg-edit.module.css";
 import { MetaTags } from "comps/metatags";
 import { Form, Scripts } from "react-router";
-import { readMsgFile } from "./message";
 import fs from "node:fs/promises";
 import { useRef, useState } from "react";
 import { marked } from "marked";
+import { readMsgFile } from "~/components/readMsgFile.server";
 
 async function walkImageFiles(): Promise<string[]> {
   const dir = "public/images";
   try {
     const entries = await fs.readdir(dir, { withFileTypes: true });
     return entries
-      .filter((entry) => entry.isFile() && (entry.name.toLowerCase().endsWith(".png") || entry.name.toLocaleLowerCase().endsWith(".jpg")))
+      .filter((entry) => {
+        if (!entry.isFile()) return false;
+        const fileName = entry.name.toLowerCase();
+        return (
+          fileName.endsWith(".png")
+          || fileName.endsWith(".jpg")
+          || fileName.endsWith(".gif")
+          || fileName.endsWith(".webp")
+        )
+      })
       .map((entry) => entry.name)
       .sort();
   } catch (err) {
@@ -25,7 +34,7 @@ async function walkImageFiles(): Promise<string[]> {
 
 function getNowISOdatetime() {
   const dateString = new Date().toISOString();
-  return dateString.slice(0, dateString.lastIndexOf(":"));
+  return dateString.slice(0, dateString.lastIndexOf("."));
 }
 
 function stringsToYAMLList(strings: string[]) {
@@ -37,7 +46,7 @@ function stringsToYAMLList(strings: string[]) {
   return list;
 }
 
-export async function loader({ params }: Route.LoaderArgs) {
+export async function loader({ request, params }: Route.LoaderArgs) {
   let images = null;
   try {
     images = await walkImageFiles();
@@ -46,19 +55,31 @@ export async function loader({ params }: Route.LoaderArgs) {
 
   let message;
   try {
-    message = params.slug ? await readMsgFile(encodeURIComponent(params.slug)) : null;
+    message = params.slug ? await readMsgFile(params.slug) : null;
   } catch (err) {
     throw new Response(undefined, { status: 404, statusText: "Message not found" })
   }
 
-  return { message, images, existingTags: ["minecraft", "bta"] };
+  const searchParams = new URL(request.url).searchParams
+  let reply;
+  if (params.slug === undefined && searchParams.has("replyto")) {
+    const replyto = searchParams.get("replyto");
+    reply = `>RE: [${replyto}](/msg/${replyto})\n\n`;
+  }
+
+  return {
+    message,
+    images,
+    reply,
+    existingTags: ["minecraft", "bta"],
+  };
 }
 
-export async function action({ request }: Route.ActionArgs) {
+export async function action({ request, params }: Route.ActionArgs) {
   const formData = await request.formData();
 
-  const date = getNowISOdatetime();
-  const slug = encodeURIComponent((formData.get("slug") as string) || date);
+  const date = (formData.get("date") as string) || getNowISOdatetime();
+  const slug = params.slug ?? date.replace("T", "_").replaceAll(":", "");
   const author = formData.get("author") as string;
   const tags = stringsToYAMLList(formData.getAll("tags") as string[]);
   const message = formData.get("message") as string;
@@ -71,20 +92,20 @@ export async function action({ request }: Route.ActionArgs) {
 }
 
 export default ({ loaderData, params }: Route.ComponentProps) => {
-  const author: string = loaderData?.message?.data["author"] ?? "sshiiden";
-  const message = loaderData?.message?.content ?? "";
+  const author: string = loaderData.message?.data["author"] ?? "sshiiden";
+  const message = loaderData.message?.content ?? loaderData.reply ?? "";
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  const handleAddImage = (path: string) => {
+  const handleAddImage = async (path: string) => {
     const textarea = textareaRef.current;
     if (!textarea) return;
     textarea.value += `\n![](/images/${encodeURIComponent(path)})`;
-    setHtmlPreview(marked(textarea.value));
+    setHtmlPreview(await marked(textarea.value));
   }
 
-  const [htmlPreview, setHtmlPreview] = useState(marked(message));
-  const [tags, setTags] = useState<string[]>(loaderData?.message?.data["tags"] ?? []);
+  const [htmlPreview, setHtmlPreview] = useState(loaderData.message?.content_html ?? "");
+  const [tags, setTags] = useState<string[]>(loaderData.message?.data["tags"] ?? []);
 
   return <>
     <MetaTags />
@@ -92,15 +113,7 @@ export default ({ loaderData, params }: Route.ComponentProps) => {
     <main className={style["main"]}>
       <Form method="POST">
         <button type="submit" hidden disabled />
-        <label>
-          <small>Slug</small>
-          <input
-            name="slug"
-            placeholder="whatever the datetime is..."
-            defaultValue={params.slug}
-            readOnly={params.slug !== undefined}
-          />
-        </label>
+        <input type="text" name="date" defaultValue={loaderData.message?.data["date"]} hidden />
         <label>
           <small>Author</small>
           <input
@@ -113,7 +126,7 @@ export default ({ loaderData, params }: Route.ComponentProps) => {
         <label htmlFor="tags">
           <small>Tags</small>
           <input
-            type="search"
+            type="text"
             placeholder="Search for or add a tag..."
             list="tags-datalist"
             onKeyDown={(e) => {
@@ -140,13 +153,15 @@ export default ({ loaderData, params }: Route.ComponentProps) => {
         </label>
         <label htmlFor="message">
           <small>Message</small>
-          <button
-            type="button"
-            popoverTarget="image-dialog"
-            popoverTargetAction="show"
-          >
-            + img
-          </button>
+          <menu type="toolbar">
+            <button
+              type="button"
+              popoverTarget="image-dialog"
+              popoverTargetAction="show"
+            >
+              + img
+            </button>
+          </menu>
           <textarea
             ref={textareaRef}
             id="message"
@@ -174,7 +189,7 @@ export default ({ loaderData, params }: Route.ComponentProps) => {
         Close
       </button>
       <section>
-        <ul>
+        <menu type="context">
           {loaderData.images?.map(image => (
             <li key={image}>
               <button
@@ -188,7 +203,7 @@ export default ({ loaderData, params }: Route.ComponentProps) => {
               </button>
             </li>
           ))}
-        </ul>
+        </menu>
       </section>
     </dialog>
   </>

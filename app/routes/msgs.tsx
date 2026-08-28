@@ -12,6 +12,7 @@ export async function loader({ params }: Route.LoaderArgs) {
   const entries: {
     data: { [key: string]: any },
     content: string,
+    content_html: string,
     slug: string,
   }[] = [];
 
@@ -19,9 +20,20 @@ export async function loader({ params }: Route.LoaderArgs) {
     const raw = await fs.readFile(filePath, 'utf8');
     const { data, content } = matter(raw);
     if (params.tag && !data["tags"].includes(params.tag)) continue;
+
+    marked.use({
+      renderer: {
+        image({ href, title, text }) {
+          return `<img src="${href}" alt="${text}" title="${title ?? ""}" loading="lazy" />`;
+        },
+      },
+    });
+    const content_html = await marked(content);
+
     entries.push({
       data,
       content,
+      content_html,
       slug: filePath.replace("app/msgs/", "").replace(".md", ""),
     });
   }
@@ -47,17 +59,24 @@ function Message({ data }: { data: Route.ComponentProps["loaderData"][number] })
         </div>
         <Link to={`/msg/${data["slug"]}`} className="button">Open</Link>
         {import.meta.env.DEV &&
-          <Link to={`/msg-edit/${data["slug"]}`} className="button dev">Edit</Link>
+          <>
+            <Link to={`/msg-edit/${data["slug"]}`} className="button dev">Edit</Link>
+            <Link to={`/msg-edit?replyto=${data["slug"]}`} className="button dev">Reply</Link>
+          </>
         }
       </section>
-      <article dangerouslySetInnerHTML={{ __html: marked(data.content) }} />
+      <article dangerouslySetInnerHTML={{ __html: data.content_html }} />
     </li>
   );
 }
 
 export default ({ loaderData, params }: Route.ComponentProps) => {
   return <>
-    <MetaTags />
+    <MetaTags
+      title={`All Messages${params.tag ? ` (tagged ${params.tag})` : ""}`}
+      description={`All messages${params.tag ? ` tagged ${params.tag}` : ""}.`}
+      keywords={params.tag ?? "all"}
+    />
     <main className={style["main"]}>
       <h1>All Messages{params.tag && ` (tagged ${params.tag})`}</h1>
       <section>

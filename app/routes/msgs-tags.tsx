@@ -34,7 +34,10 @@ export async function loader({ }: Route.LoaderArgs) {
 
 export default ({ loaderData }: Route.ComponentProps) => {
   return <>
-    <MetaTags />
+    <MetaTags
+      title="Messages Tags"
+      description="Index of all messages tags."
+    />
     <main className={style["main-tags-list"]}>
       <h1>Messages Tags</h1>
       <ol>

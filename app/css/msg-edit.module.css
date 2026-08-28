@@ -95,7 +95,7 @@
     align-items: flex-start;
   }
 
-  ul {
+  menu {
     list-style: none;
     display: grid;
     grid-template-columns: repeat(4, 1fr);

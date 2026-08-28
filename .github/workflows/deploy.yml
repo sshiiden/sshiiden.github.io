@@ -37,6 +37,8 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
+      - name: Remove .data and .js files
+        run: rm -rfv *.data *.js
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
         with:
