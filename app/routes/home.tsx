@@ -51,6 +51,11 @@ export default ({ }: Route.ComponentProps) => {
             url="https://github.com/sshiiden"
           />
           <LinkItem
+            pre="Twitter: "
+            label="@sshiiden"
+            url="https://x.com/sshiiden"
+          />
+          <LinkItem
             pre="Linkedin: "
             label="in/nicholas-santos-shiden"
             url="https://www.linkedin.com/in/nicholas-santos-shiden/"

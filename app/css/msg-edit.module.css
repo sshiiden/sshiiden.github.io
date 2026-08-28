@@ -1,0 +1,120 @@
+.main {
+  display: flex;
+  flex: 1;
+
+  img {
+    max-width: 100%;
+  }
+
+  form,
+  aside {
+    width: 100%;
+    border: 3px outset var(--color-bg-light);
+    padding: 3px;
+  }
+
+  form {
+    position: sticky;
+    top: var(--spacing-2xs);
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    max-height: 90vh;
+    gap: var(--spacing-2xs);
+
+    label {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+
+      small {
+        color: var(--color-text-muted);
+      }
+    }
+
+    input,
+    textarea {
+      background-color: var(--color-bg-light);
+      padding: var(--spacing-2xs);
+      border: 2px inset var(--color-bg);
+    }
+
+    label:has(textarea) {
+      flex: 1;
+    }
+
+    textarea {
+      resize: none;
+      height: 100%;
+    }
+
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0 var(--spacing-2xs);
+
+      li {
+        font: var(--small);
+
+        button {
+          line-height: 0;
+          aspect-ratio: 1;
+          margin-left: var(--spacing-xs);
+        }
+      }
+    }
+
+    button {
+      align-self: flex-start;
+      text-transform: uppercase;
+      border: 2px outset var(--color-bg-light);
+      background-color: var(--color-bg);
+      padding: var(--spacing-2xs);
+    }
+  }
+}
+
+.dialog-image {
+  margin-block: auto;
+  max-height: 90%;
+  border: 3px outset var(--color-bg-light);
+  padding: 3px;
+  background-color: var(--color-bg);
+
+  &::backdrop {
+    background-color: oklch(from var(--color-bg-dark) l c h / 0.5);
+  }
+
+  >button {
+    text-transform: uppercase;
+    border: 2px outset var(--color-bg-light);
+    background-color: var(--color-bg);
+    padding: var(--spacing-2xs);
+  }
+
+  li>button {
+    border: 2px outset var(--color-bg-light);
+    background-color: var(--color-bg);
+    padding: var(--spacing-2xs);
+    width: 100%;
+  }
+
+  ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  img,
+  span {
+    display: block;
+  }
+
+  img {
+    max-width: 128px;
+    aspect-ratio: 2;
+    background-color: var(--color-bg-dark);
+    object-fit: contain;
+    width: 100%;
+  }
+}

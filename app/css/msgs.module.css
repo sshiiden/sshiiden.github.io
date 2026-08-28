@@ -1,0 +1,31 @@
+.main {
+  ol {
+    margin-top: var(--spacing-xs);
+    list-style: none;
+  }
+
+  >ol>li {
+    border: 3px outset var(--color-bg-light);
+    display: flex;
+    flex-direction: column;
+  }
+
+  span {
+    display: block;
+  }
+
+  section {
+    padding-inline: 3px;
+  }
+
+  article {
+    margin-top: var(--spacing-2xs);
+    background-color: var(--color-bg-light);
+    border: 2px inset var(--color-bg);
+    flex: 1;
+  }
+
+  img {
+    max-width: 100%;
+  }
+}

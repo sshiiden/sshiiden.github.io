@@ -4,8 +4,6 @@ import {
   isRouteErrorResponse,
   Links,
   Outlet,
-  Scripts,
-  ScrollRestoration,
 } from "react-router";
 import { isbot } from "isbot";
 
@@ -32,8 +30,6 @@ export default ({ loaderData }: Route.ComponentProps) => {
       </head>
       <body>
         <Outlet />
-        {/* <ScrollRestoration />
-        <Scripts /> */}
       </body>
     </html>
   );

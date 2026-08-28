@@ -10,17 +10,8 @@ export default ({ }: Route.ComponentProps) => {
       </Link>
       <nav>
         <NavLink to="/">Home</NavLink>
-        <NavLink to="blog">Blog</NavLink>
-        <NavLink to="imgs">Imgs</NavLink>
+        <NavLink to="/msgs">Msgs</NavLink>
       </nav>
-      {import.meta.env.DEV && (
-        <nav style={{
-          "marginLeft": "auto",
-          "borderInline": "8px solid red",
-        }}>
-          <NavLink to="/dev/imgs-edit">EDIT_IMGS</NavLink>
-        </nav>
-      )}
     </header>
     <Outlet />
     <footer className={style["footer"]}>

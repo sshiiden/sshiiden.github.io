@@ -1,10 +1,9 @@
 import type { Config } from "@react-router/dev/config";
-import matter from "gray-matter";
 import fs from "node:fs/promises";
 import path from "node:path";
 
-export async function walkArticlesFiles(): Promise<string[]> {
-  const dir = "app/articles";
+export async function walkMsgsFiles(): Promise<string[]> {
+  const dir = "app/msgs";
   try {
     const entries = await fs.readdir(dir, { withFileTypes: true });
     return entries
@@ -19,28 +18,25 @@ export async function walkArticlesFiles(): Promise<string[]> {
   }
 }
 
-async function getArticlesSlugs() {
-  const files = await walkArticlesFiles();
-  const articlesSlugs: string[] = [];
+async function getMsgsSlugs() {
+  const files = await walkMsgsFiles();
+  const slugs: string[] = [];
 
   for (const filePath of files) {
-    const raw = await fs.readFile(filePath, 'utf8');
-    const { data } = matter(raw);
-    articlesSlugs.push(data["slug"]);
+    slugs.push(filePath.replace("app/msgs/", "").replace(".md", ""));
   }
 
-  return articlesSlugs;
+  return slugs;
 }
 
 export default {
   ssr: true,
   async prerender() {
-    const articlesSlugs = await getArticlesSlugs();
+    const slugs = await getMsgsSlugs();
     return [
       "/",
-      "/blog",
-      "/imgs",
-      ...articlesSlugs.map((s) => `/articles/${s}`),
+      "/msgs",
+      ...slugs.map((s) => `/msg/${s}`),
     ];
   },
 } satisfies Config;
