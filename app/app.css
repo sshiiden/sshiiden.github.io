@@ -153,11 +153,16 @@ body {
 
 button,
 .button {
+  display: inline-block;
   cursor: pointer;
   text-decoration: none;
   border: var(--border-secondary);
   background-color: var(--color-bg);
   padding: var(--spacing-2xs);
+
+  &[hidden] {
+    display: none;
+  }
 }
 
 .dev {

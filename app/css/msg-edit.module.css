@@ -4,6 +4,7 @@
 
   img {
     max-width: 100%;
+    display: block;
   }
 
   form,
@@ -50,6 +51,7 @@
     }
 
     ul {
+      margin-top: var(--spacing-2xs);
       display: flex;
       flex-wrap: wrap;
       gap: 0 var(--spacing-2xs);
