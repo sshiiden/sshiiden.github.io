@@ -17,6 +17,16 @@
     >*+* {
       margin-block-start: 0.3em;
     }
+
+    h2 {
+      font: var(--h3);
+    }
+
+    dl {
+      display: grid;
+      grid-template-columns: auto auto;
+      gap: 0 var(--spacing-xs);
+    }
   }
 
   li>img {

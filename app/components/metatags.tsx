@@ -8,8 +8,8 @@ type TagsData = {
 
 export const defaults: TagsData = {
   title: "sshiiden.dev",
-  description: "Nicholas Santos Shiden's personal website. Software engineer specializing in web development & UI/UX. Building and maintaining games with the Blazium Game Engine at Blazium Games.",
-  keywords: "webdev, blazium, games, ui, ux, minecraft",
+  description: "Nicholas Santos Shiden's personal website.",
+  keywords: "webdev, games, ui, ux, minecraft, gtnh, bta",
   image: "/images/sshiiden_big.png",
   cardType: "summary_small_image",
 }
