@@ -6,6 +6,7 @@ import matter from "gray-matter";
 import { Link } from "react-router";
 import { walkMsgsFiles } from "../../react-router.config";
 import { marked } from "marked";
+import { parseMarkdown } from "~/components/readMsgFile.server";
 
 export async function loader({ params }: Route.LoaderArgs) {
   const files = await walkMsgsFiles();
@@ -20,16 +21,7 @@ export async function loader({ params }: Route.LoaderArgs) {
     const raw = await fs.readFile(filePath, 'utf8');
     const { data, content } = matter(raw);
     if (params.tag && !data["tags"].includes(params.tag)) continue;
-
-    marked.use({
-      renderer: {
-        image({ href, title, text }) {
-          return `<img src="${href}" alt="${text}" title="${title ?? ""}" loading="lazy" />`;
-        },
-      },
-    });
-    const content_html = await marked(content);
-
+    const content_html = await parseMarkdown(content);
     entries.push({
       data,
       content,
@@ -51,7 +43,7 @@ function Message({ data }: { data: Route.ComponentProps["loaderData"][number] })
   });
 
   return (
-    <li>
+    <li className={style["message-entry"]}>
       <section>
         <div>
           <span>{data.data["author"]} &ndash; <time dateTime={datetime.toISOString()}>{datetimeFormatted}</time></span>

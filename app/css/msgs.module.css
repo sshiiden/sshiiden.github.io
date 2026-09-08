@@ -1,5 +1,5 @@
 .main {
-  max-width: 900px;
+  max-width: fit-content;
 
   >section {
     margin-top: var(--spacing-xs);
@@ -10,33 +10,7 @@
 
   >ol {
     list-style: none;
-  }
-
-  >ol>li {
-    border: var(--border-main);
-    padding: var(--spacing-2xs);
-
-    span {
-      display: block;
-    }
-
-    section {
-      display: flex;
-      align-items: flex-start;
-      gap: var(--spacing-2xs);
-    }
-
-    article {
-      margin-top: var(--spacing-2xs);
-      background-color: var(--color-bg-light);
-      border: 2px inset var(--color-bg);
-      flex: 1;
-    }
-  }
-
-  img {
-    display: block;
-    max-width: 100%;
+    width: fit-content;
   }
 }
 
@@ -46,5 +20,61 @@
     list-style: none;
     display: flex;
     flex-wrap: wrap;
+  }
+}
+
+.message-entry {
+  border: var(--border-main);
+  padding: var(--spacing-2xs);
+  max-width: calc(100vw - var(--spacing-xs));
+
+  section {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-2xs);
+
+    span {
+      display: block;
+    }
+  }
+
+  article {
+    max-width: var(--max-readable-width);
+    width: 100%;
+    margin-top: var(--spacing-2xs);
+    background-color: var(--color-bg-light);
+    border: 2px inset var(--color-bg);
+    flex: 1;
+    padding: var(--spacing-3xs);
+
+    pre {
+      background-color: var(--color-bg-dark);
+      color: white;
+
+      &::before {
+        content: "> " attr(data-lang);
+        display: block;
+      }
+
+      code {
+        display: block;
+        padding: var(--spacing-3xs);
+        max-width: 100%;
+        overflow: scroll;
+        background-color: none;
+        padding-block: var(--spacing-2xs) var(--spacing-s);
+      }
+    }
+
+    code {
+      background-color: var(--color-bg-dark);
+      color: white;
+      padding-inline: var(--spacing-3xs);
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
   }
 }

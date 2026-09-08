@@ -12,10 +12,10 @@
   }
 
   >section {
-    max-width: 700px;
+    max-width: var(--max-readable-width);
 
     >*+* {
-      margin-block-start: 0.3em;
+      margin-top: 0.3em;
     }
 
     h2 {
