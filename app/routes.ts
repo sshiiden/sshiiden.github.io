@@ -1,4 +1,4 @@
-import { type RouteConfig, index, route, layout } from "@react-router/dev/routes";
+import { type RouteConfig, index, route } from "@react-router/dev/routes";
 
 const routes = [
   index("routes/home.tsx"),
@@ -16,5 +16,5 @@ if (import.meta.env.DEV) {
 }
 
 export default [
-  layout("routes/layout.tsx", routes),
+  ...routes,
 ] satisfies RouteConfig;

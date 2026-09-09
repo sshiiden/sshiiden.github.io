@@ -1,5 +1,6 @@
 import type { Route } from "./+types/msg-edit";
 import style from "css/msg-edit.module.css";
+import styleContent from "css/msgs.module.css";
 import { MetaTags } from "comps/metatags";
 import { Form, Scripts } from "react-router";
 import fs from "node:fs/promises";
@@ -145,7 +146,7 @@ export default ({ loaderData, params }: Route.ComponentProps) => {
                 <input name="tags" id="tags" defaultValue={tag} hidden />
                 <button
                   type="button"
-                  onClick={() => {setTags(tags.filter(t => t !== tag))}}
+                  onClick={() => { setTags(tags.filter(t => t !== tag)) }}
                 >X</button>
               </li>
             ))}
@@ -174,7 +175,12 @@ export default ({ loaderData, params }: Route.ComponentProps) => {
         </label>
         <button type="submit">{params.slug ? "Update" : "Send"}</button>
       </Form>
-      <aside dangerouslySetInnerHTML={{ __html: htmlPreview }} />
+      <aside>
+        <article
+          className={styleContent["message-content"]}
+          dangerouslySetInnerHTML={{ __html: htmlPreview }}
+        />
+      </aside>
     </main>
     <dialog
       popover="auto"

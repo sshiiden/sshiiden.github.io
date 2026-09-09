@@ -1,22 +1,22 @@
 html {
   --hue: 300;
-  --chroma: 0.03;
+  --chroma: 0.02;
   --color-bg-dark: oklch(0.25 var(--chroma) var(--hue));
   --color-bg: oklch(0.75 var(--chroma) var(--hue));
   --color-bg-light: oklch(0.90 var(--chroma) var(--hue));
 
   --color-text: oklch(0.00 0.00 0);
-  --color-text-muted: oklch(from var(--color-text) l c h / 0.8);
+  --color-text-muted: oklch(from var(--color-text) l c h / 0.75);
 
   --font-f-heading: Helvetica, sans-serif;
   --font-f-text: var(--font-f-heading);
 
-  --font-s-h1: 2.00rem;
-  --font-s-h2: 1.75rem;
-  --font-s-h3: 1.50rem;
-  --font-s-h4: 1.25rem;
-  --font-s-p: 1.00rem;
-  --font-s-small: 0.75rem;
+  --font-s-h1: 1.750rem;
+  --font-s-h2: 1.500rem;
+  --font-s-h3: 1.250rem;
+  --font-s-h4: 1.125rem;
+  --font-s-p: 1.000rem;
+  --font-s-small: 0.750rem;
 
   --font-w-thin: 100;
   --font-w-extralight: 200;
@@ -28,9 +28,9 @@ html {
   --font-w-extrabold: 800;
   --font-w-black: 900;
 
-  --line-h-tight: 1.00em;
-  --line-h-base: 1.25em;
-  --line-h-loose: 1.50em;
+  --line-h-tight: 1.000em;
+  --line-h-base: 1.125em;
+  --line-h-loose: 1.250em;
 
   --spacing-3xs: 0.125rem;
   --spacing-2xs: 0.25rem;
@@ -55,8 +55,7 @@ html {
 
   background-color: var(--color-bg);
   color-scheme: light;
-  scrollbar-gutter: stable;
-  scrollbar-width: auto;
+  scrollbar-color: var(--color-bg-dark) var(--color-bg-light);
   font-family: var(--font-f-text);
   color: var(--color-text);
 
@@ -112,10 +111,9 @@ html {
 
   hr {
     height: 1px;
-    max-width: 512px;
     background-color: var(--color-text);
-    margin-block: var(--spacing-xs) var(--spacing-m);
-    opacity: 0.2;
+    margin-block: var(--spacing-xs);
+    opacity: 0.3;
   }
 
   &:has(dialog:popover-open),
@@ -138,20 +136,80 @@ html {
   img {
     user-select: none;
     -webkit-user-drag: none;
+    max-width: 100%;
   }
 }
 
 body {
   min-height: 100dvh;
   position: relative;
-  display: flex;
-  flex-direction: column;
+  display: grid;
   z-index: 0;
-  padding: var(--spacing-2xs);
+  grid-template-columns: min-content auto;
+  grid-template-rows: auto 1lh;
 
-  --max-readable-width: 75ch;
+  --max-readable-width: 80ch;
   --border-main: 3px outset var(--color-bg-light);
   --border-secondary: 2px outset var(--color-bg-light);
+
+  >main {
+    grid-column: 2;
+    grid-row: span 2;
+    overflow-y: scroll;
+    max-height: 100dvh;
+  }
+
+  >header,
+  >footer small {
+    padding: 0 var(--spacing-3xs);
+  }
+
+  >header {
+    >a {
+      font: var(--h1);
+    }
+
+    dl {
+      dt {
+        font: var(--small);
+      }
+
+      dd {
+        line-height: var(--line-h-tight);
+
+        &::before {
+          content: "| ";
+        }
+      }
+
+      dd+dt {
+        margin-top: var(--spacing-xs);
+      }
+    }
+  }
+
+  >footer {
+    text-wrap-mode: nowrap;
+
+    small {
+      display: inline-block;
+      width: 100%;
+      border-top: 1px dotted var(--color-bg-dark);
+    }
+  }
+
+  @media (width<900px) {
+    grid-template: auto / auto;
+
+    >main {
+      all: unset;
+      justify-self: center;
+    }
+  }
+
+  >main {
+    border-left: 1px dotted var(--color-bg-dark);
+  }
 }
 
 button,
@@ -165,6 +223,58 @@ button,
 
   &[hidden] {
     display: none;
+  }
+}
+
+
+
+/*
+  Study of YouTube's new buttons that are sometimes used
+  <div className="cooltest"><button>Click Me!</button></div>
+*/
+div.cooltest {
+  padding: var(--spacing-4xl);
+  background-color: black;
+
+  button {
+    all: unset;
+
+    /*Actual styling*/
+    background-color: oklch(0.3 0.25 300);
+    background-color: oklch(0.3 0.0 0);
+    color: white;
+    cursor: pointer;
+    position: relative;
+    border-radius: 4px;
+    padding: 2px 8px;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: .5px;
+      pointer-events: none;
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      background-image: linear-gradient(rgba(255, 255, 255, 0.3), transparent 75%);
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 50%;
+      top: 0;
+      left: 0;
+      border-radius: inherit;
+      filter: blur(1px);
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    &:active {
+      translate: 0 1px;
+    }
   }
 }
 
