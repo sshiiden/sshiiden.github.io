@@ -1,7 +1,7 @@
 import type { Route } from "./+types/home";
 import style from "css/home.module.css";
 import { MetaTags } from "comps/metatags";
-import { Link, type To } from "react-router";
+import { Link } from "react-router";
 
 export default ({ }: Route.ComponentProps) => {
   return <>
@@ -9,8 +9,10 @@ export default ({ }: Route.ComponentProps) => {
     <main className={style["main"]}>
       <img src="/images/Senzanome3.jpg" alt="Senzanome3" />
       <section>
-        <h1>Nicholas Santos Shiden</h1>
-        <p>Also known as sshiiden.</p>
+        <hgroup>
+          <h1>Nicholas Santos Shiden</h1>
+          <p>Also known as sshiiden.</p>
+        </hgroup>
         <h2>Contacts</h2>
         <dl>
           <dt>Email:</dt>

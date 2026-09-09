@@ -5,7 +5,6 @@ import fs from "node:fs/promises";
 import matter from "gray-matter";
 import { Link } from "react-router";
 import { walkMsgsFiles } from "../../react-router.config";
-import { marked } from "marked";
 import { parseMarkdown } from "~/components/readMsgFile.server";
 
 export async function loader({ params }: Route.LoaderArgs) {
@@ -47,7 +46,7 @@ function Message({ data }: { data: Route.ComponentProps["loaderData"][number] })
       <section>
         <div>
           <span>{data.data["author"]} &ndash; <time dateTime={datetime.toISOString()}>{datetimeFormatted}</time></span>
-          <span>tags: {data.data["tags"]?.toString()}</span>
+          <span>tags: {data.data["tags"]?.join(", ")}</span>
         </div>
         <Link to={`/msg/${data["slug"]}`} className="button">Open</Link>
         {import.meta.env.DEV &&

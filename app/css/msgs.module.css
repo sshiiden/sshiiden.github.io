@@ -27,8 +27,9 @@
   border: var(--border-main);
   padding: var(--spacing-2xs);
   max-width: calc(100vw - var(--spacing-xs));
+  width: fit-content;
 
-  section {
+  >section {
     display: flex;
     align-items: flex-start;
     gap: var(--spacing-2xs);
@@ -36,45 +37,64 @@
     span {
       display: block;
     }
+
+    &+article {
+      margin-top: var(--spacing-2xs);
+    }
   }
+}
 
-  article {
-    max-width: var(--max-readable-width);
-    width: 100%;
-    margin-top: var(--spacing-2xs);
-    background-color: var(--color-bg-light);
-    border: 2px inset var(--color-bg);
-    flex: 1;
-    padding: var(--spacing-3xs);
+.message-entry>article,
+.message-content {
+  max-width: 100%;
+  width: var(--max-readable-width);
+  background-color: var(--color-bg-light);
+  border: 2px inset var(--color-bg);
+  padding: var(--spacing-3xs);
 
-    pre {
-      background-color: var(--color-bg-dark);
-      color: white;
+  pre {
+    background-color: var(--color-bg-dark);
+    color: white;
 
-      &::before {
-        content: "> " attr(data-lang);
-        display: block;
-      }
-
-      code {
-        display: block;
-        padding: var(--spacing-3xs);
-        max-width: 100%;
-        overflow: scroll;
-        background-color: none;
-        padding-block: var(--spacing-2xs) var(--spacing-s);
-      }
+    &::before {
+      content: "> " attr(data-lang);
+      display: block;
     }
 
     code {
-      background-color: var(--color-bg-dark);
-      color: white;
-      padding-inline: var(--spacing-3xs);
+      display: block;
+      padding: var(--spacing-3xs);
+      max-width: 100%;
+      overflow: scroll;
+      background-color: none;
+      padding-block: var(--spacing-2xs) var(--spacing-s);
+    }
+  }
+
+  code {
+    background-color: var(--color-bg-dark);
+    color: white;
+    padding-inline: var(--spacing-3xs);
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  table {
+    border-collapse: separate;
+    background-color: var(--color-text-muted);
+    border-spacing: 1px;
+
+    thead,
+    tbody {
+      background-color: var(--color-bg-light);
     }
 
-    img {
-      display: block;
-      max-width: 100%;
+    th,
+    td {
+      padding: var(--spacing-3xs);
     }
   }
 }
