@@ -1,38 +1,94 @@
 .main {
-  display: flex;
-
-  @media (max-width: 700px) {
-    flex-direction: column-reverse;
+  ol {
+    list-style: none;
   }
 
-  >img,
-  >section {
-    border: var(--border-main);
-    padding: var(--spacing-2xs);
-  }
-
-  >section {
+  article {
     max-width: var(--max-readable-width);
+    width: calc(100vw - var(--spacing-3xs));
+    border-right: 1px dotted var(--color-bg-dark);
 
-    >*+* {
-      margin-top: 0.3em;
+    >hgroup {
+      border-block: 1px dotted var(--color-bg-dark);
+      padding-inline: var(--spacing-xs);
+
+      address {
+        display: inline;
+        font-style: normal;
+      }
     }
 
-    h2 {
-      font: var(--h3);
-    }
+    >section {
+      max-width: 100%;
+      background-color: var(--color-bg-light);
+      padding: var(--spacing-xs);
 
-    dl {
-      display: grid;
-      grid-template-columns: auto auto;
-      gap: 0 var(--spacing-xs);
-    }
-  }
+      >*+* {
+        margin-top: var(--spacing-2xs);
+      }
 
-  li>img {
-    width: 24px;
-    height: 24px;
-    margin-right: var(--spacing-2xs);
-    alignment-baseline: central;
+      figure {
+        width: fit-content;
+
+        &+figure {
+          margin-top: 0;
+        }
+      }
+
+      figcaption {
+        border: 1px solid var(--color-bg);
+        border-top: none;
+        padding-inline: var(--spacing-2xs);
+      }
+
+      img {
+        display: block;
+      }
+
+      code {
+        background-color: var(--color-bg-dark);
+        border: 1px dotted var(--color-bg);
+        color: white;
+        padding-inline: var(--spacing-3xs);
+      }
+
+      pre {
+        color: white;
+
+        &::before {
+          content: "> " attr(data-lang);
+          border: 1px dotted var(--color-bg);
+          border-bottom: none;
+          background-color: var(--color-bg-dark);
+          padding-inline: var(--spacing-2xs);
+          display: block;
+          width: min-content;
+        }
+
+        code {
+          display: block;
+          max-width: 100%;
+          overflow: scroll;
+          padding-block: var(--spacing-3xs) var(--spacing-s);
+          scrollbar-color: var(--color-bg) var(--color-bg-dark);
+        }
+      }
+
+      table {
+        border-collapse: separate;
+        background-color: var(--color-text-muted);
+        border-spacing: 1px;
+
+        thead,
+        tbody {
+          background-color: var(--color-bg-light);
+        }
+
+        th,
+        td {
+          padding: var(--spacing-3xs);
+        }
+      }
+    }
   }
 }

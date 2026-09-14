@@ -7,7 +7,7 @@ type TagsData = {
 }
 
 export const defaults: TagsData = {
-  title: "sshiiden.dev",
+  title: "sshiiden",
   description: "Nicholas Santos Shiden's personal website.",
   keywords: "webdev, games, ui, ux, minecraft, gtnh, bta",
   image: "/images/sshiiden_big.png",

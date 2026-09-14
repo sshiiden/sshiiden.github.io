@@ -2,6 +2,7 @@ import type { Route } from "./+types/root";
 import "./app.css";
 import {
   isRouteErrorResponse,
+  Link,
   Links,
   Outlet,
 } from "react-router";
@@ -29,7 +30,26 @@ export default ({ loaderData }: Route.ComponentProps) => {
         <Links />
       </head>
       <body>
+        <header>
+          <Link to="/">sshiiden</Link>
+          <p>The website of Nicholas Santos Shiden (sshiiden)</p>
+          <hr />
+          <dl>
+            <dt>Email:</dt>
+            <dd><Link to="mailto:sshiiden@gmail.com">sshiiden@gmail.com</Link></dd>
+            <dt>Discord:</dt>
+            <dd><Link to="https://discordapp.com/users/sshiiden#0001">@sshiiden</Link></dd>
+            <dt>GitHub:</dt>
+            <dd><Link to="https://github.com/sshiiden">@sshiiden</Link></dd>
+            <dt>Twitter:</dt>
+            <dd><Link to="https://x.com/sshiiden">@sshiiden</Link></dd>
+          </dl>
+          <hr />
+        </header>
         <Outlet />
+        <footer>
+          <small>&gt; Nicholas Santos Shiden (sshiiden)</small>
+        </footer>
       </body>
     </html>
   );
